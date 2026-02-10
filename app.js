@@ -6,6 +6,7 @@ import artifactRoutes from "./routes/artifact.route.js";
 import cookieParser from "cookie-parser";
 import likes from "./models/likes.js";
 import likesRoutes from "./routes/likes.route.js";
+import comment from "./routes/comment.route.js";
 const app = express();
 
 /* Middlewares */
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 app.use("/auth",authRoutes);
 app.use("/artifacts", artifactRoutes);
 app.use("/likes", likesRoutes);
+app.use("/comments", comment);
 export default app;
 
 

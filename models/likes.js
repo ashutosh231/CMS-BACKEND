@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
+
 const likeSchema = new mongoose.Schema(
   {
-    user: {
+    artifact: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Artifact",
       required: true
     },
-    artifact: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true
@@ -15,6 +16,7 @@ const likeSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-likeSchema.index({ user: 1, artifact: 1 }, { unique: true });// explain in detail?ans:-
+// Prevent duplicate likes
+likeSchema.index({ artifact: 1, user: 1 }, { unique: true });
 
 export default mongoose.model("Like", likeSchema);

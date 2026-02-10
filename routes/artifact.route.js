@@ -5,10 +5,10 @@ import { authorizeRoles } from "../middleware/role.middleware.js";
 
 const router = express.Router();
 
-// Create a new artifact (Admin only)
-router.post("/", authMiddleware, authorizeRoles("ADMIN"), createArtifact);
+// Create a new artifact (Admin and Editor only)
+router.post("/", authMiddleware, authorizeRoles("ADMIN","EDITOR"), createArtifact);
 
 // Get all artifacts (Admin, Editor, and Viewer)
-router.get("/", authMiddleware, authorizeRoles("ADMIN", "EDITOR", "VIEWER"), getArtifacts);
+router.get("/", authMiddleware, authorizeRoles("ADMIN", "VIEWER"), getArtifacts);
 
 export default router;
