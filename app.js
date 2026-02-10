@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import authRoutes from "./routes/auth.route.js";
-import artifactRoutes from "./routes/artifacts.route.js"
-import cookieParser from "cookie-parser";
+// import artifactRoutes from "./routes/artifacts.route.js"
+// import cookieParser from "cookie-parser";
 const app = express();
 
 /* Middlewares */
@@ -14,7 +14,7 @@ app.use(morgan("dev"));
 
 
 
-app.use(cookieParser());
+// app.use(cookieParser());
 /* Test Route */
 app.get("/", (req, res) => {
   res.status(200).json({
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth",authRoutes);
-app.use("/artifacts", artifactRoutes);
+// app.use("/artifacts", artifactRoutes);
 export default app;
 
 

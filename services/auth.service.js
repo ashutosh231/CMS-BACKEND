@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import User from "../models/users.js";
+import User from "../models/user.js";
 import OTP from "../models/otp.js";
 import { generateOTP } from "../utils/generateOtp.js";
 import jwt from "jsonwebtoken";
@@ -78,39 +78,37 @@ export const verifySignupOtpService = async ({
   };
 };
 
+export const loginService = async (email, password) => {
+  const user = await User
+    .findOne({ email })
+    .select("+password");
 
+  if (!user) {
+    throw new Error("Invalid email or password");
+  }
 
-// export const loginService = async (email, password) => {
-//   const user = await User
-//     .findOne({ email })
-//     .select("+password");
+  const isMatch = await bcrypt.compare(password, user.password);
 
-//   if (!user) {
-//     throw new Error("Invalid email or password");
-//   }
+  if (!isMatch) {
+    throw new Error("Invalid email or password");
+  }
 
-//   const isMatch = await bcrypt.compare(password, user.password);
+  const token = jwt.sign(
+    {
+      id: user._id,
+      role: user.role
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: "1h" }
+  );
 
-//   if (!isMatch) {
-//     throw new Error("Invalid email or password");
-//   }
-
-//   const token = jwt.sign(
-//     {
-//       id: user._id,
-//       role: user.role
-//     },
-//     process.env.JWT_SECRET,
-//     { expiresIn: "1h" }
-//   );
-
-//   return {
-//     token,
-//     user: {
-//       id: user._id,
-//       name: user.name,
-//       email: user.email,
-//       role: user.role
-//     }
-//   };
-// };
+  return {
+    token,
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    }
+  };
+};
