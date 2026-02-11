@@ -5,7 +5,8 @@ export const createArtifact = async (req, res) => {
         const artifact= await createArtifactService({
             title: req.body.title,
             content: req.body.content,
-            userId: req.user.id
+            userId: req.user.id,
+            filePath: req.file?.path
         });
         
         res.status(201).json({
