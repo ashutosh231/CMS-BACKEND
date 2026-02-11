@@ -4,6 +4,9 @@ import {
   loginService
 } from "../services/auth.service.js";
 
+
+
+
 /**
  * POST /auth/signup/initiate
  */
@@ -22,7 +25,7 @@ export const initiateSignup = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "OTP generated successfully",
+      message: "OTP sent to your email",
       ...result
     });
   } catch (error) {

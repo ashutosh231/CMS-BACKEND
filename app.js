@@ -7,12 +7,14 @@ import cookieParser from "cookie-parser";
 import likes from "./models/likes.js";
 import likesRoutes from "./routes/likes.route.js";
 import comment from "./routes/comment.route.js";
+import helmet from "helmet";
 const app = express();
 
 /* Middlewares */
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+app.use(helmet);
 app.use(morgan("dev"));
 app.use(cookieParser());
 /* Test Route */
