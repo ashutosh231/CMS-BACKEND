@@ -1,13 +1,16 @@
 import Artifact from "../models/artifact.js";
+import cloudinary from "../config/cloudinary.js";
+import fs from "fs";
 
-export const createArtifactService = async ({title,content,userId}) => {
+export const createArtifactService = async ({title,content,userId,filePath}) => {
     if(!title || !content){
         throw new Error("Title and content are required");
     }
     let mediaUrl = null;
     if(filePath){
         const uploadResult = await cloudinary.uploader.upload(filePath, {
-            folder: "artifacts"
+            folder: "artifacts",
+            resource_type: "auto" // Supports images, videos, PDFs, etc.
         });
         mediaUrl = uploadResult.secure_url;
 
