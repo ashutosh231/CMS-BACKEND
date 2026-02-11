@@ -11,5 +11,5 @@ export const apiLimiter = rateLimit({
     legacyHeaders: false
 });
 
-export default rateLimit;
+export default apiLimiter;
 
