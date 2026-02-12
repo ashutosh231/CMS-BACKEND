@@ -15,6 +15,10 @@ const chatSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+    },
+    isRead:{
+        type:Boolean,
+        default:false
     }
 }, { timestamps: true });//to automatically add createdAt and updatedAt fields
 

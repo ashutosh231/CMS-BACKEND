@@ -10,6 +10,9 @@ const threadSchema = new mongoose.Schema({
     ],
     lastMessages:{
             type: String
+        },
+    lastMessagesAt: {
+            type: Date
         }
 }, { timestamps: true });
 

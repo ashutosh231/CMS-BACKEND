@@ -8,7 +8,7 @@ import likesRoutes from "./routes/likes.route.js";
 import comment from "./routes/comment.route.js";
 import helmet from "helmet";
 import webhookRoutes from "./webhooks/webhook.js";
-
+import chatsRoutes from "./routes/chats.route.js";
 const app = express();
 
 /* Middlewares */
@@ -31,6 +31,7 @@ app.use("/artifacts", artifactRoutes);
 app.use("/likes", likesRoutes);
 app.use("/comments", comment);
 app.use("/webhooks",webhookRoutes);
+app.use("/chats", chatsRoutes);
 export default app;
 
 
