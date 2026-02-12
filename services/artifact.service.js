@@ -12,7 +12,7 @@ export const createArtifactService = async ({title,content,userId,filePath}) => 
             folder: "artifacts",
             resource_type: "auto" // Supports images, videos, PDFs, etc.
         });
-        mediaUrl = uploadResult.secure_url;
+        mediaUrl = uploadResult.secure_url;//store the secure URL returned by Cloudinary
 
         //delete local file after upload
         fs.unlinkSync(filePath);
