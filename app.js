@@ -9,6 +9,8 @@ import comment from "./routes/comment.route.js";
 import helmet from "helmet";
 import webhookRoutes from "./webhooks/webhook.js";
 import chatsRoutes from "./routes/chats.route.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./config/swagger.js";
 const app = express();
 
 /* Middlewares */
@@ -32,6 +34,7 @@ app.use("/likes", likesRoutes);
 app.use("/comments", comment);
 app.use("/webhooks",webhookRoutes);
 app.use("/chats", chatsRoutes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 export default app;
 
 

@@ -5,10 +5,43 @@ import { toggleLike } from "../controllers/likes.controller.js";
 
 const router = express.Router();
 
-// Like an artifact (Admin, Editor, and Viewer)
+
+/**
+ * @openapi
+ * /likes/{artifactId}/like:
+ *   post:
+ *     summary: Like an artifact
+ *     tags:
+ *       - Likes
+ *     parameters:
+ *       - in: path
+ *         name: artifactId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Artifact liked
+ */
 router.post("/:artifactId/like", authMiddleware, authorizeRoles("ADMIN", "EDITOR", "VIEWER"), toggleLike);
 
-// Unlike an artifact (Admin, Editor, and Viewer)
+/**
+ * @openapi
+ * /likes/{artifactId}/unlike:
+ *   post:
+ *     summary: Unlike an artifact
+ *     tags:
+ *       - Likes
+ *     parameters:
+ *       - in: path
+ *         name: artifactId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Artifact unliked
+ */
 router.post("/:artifactId/unlike", authMiddleware, authorizeRoles("ADMIN", "EDITOR", "VIEWER"), toggleLike);
 
 export default router;
